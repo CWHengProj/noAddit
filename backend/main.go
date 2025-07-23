@@ -13,9 +13,14 @@ func main(){
   os.Exit(0)
 
   # retrieve values from config
-
+    # file io to retrieve config.json
+    # check and terminate app if json does not exist
   # call the reddit API
+    # make use of http
+    # error handling
 
 
   # serve the results to angular frontend
+    # use gin to serve endpoints
+    # 
   }
