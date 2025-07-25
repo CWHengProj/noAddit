@@ -45,10 +45,10 @@ func Subreddits(c *gin.Context){
 	limitStr := strconv.Itoa(limit)
 	var results []json.RawMessage
 	for i := 0; i < len(subredditArray); i++ {
+	//TODO: retrieve from the cache if it already exists
 		srData := utils.CallGETEndpoint(baseUrl,subredditArray[i],limitStr,timeFrame)
 		results = append(results, srData)
 	}
-	// TODO: call the service, retrieve the data (or cached data), return as an array
 
 	// Expose the endpoint with crafted subreddit json information to display
 	c.JSON(http.StatusOK, gin.H{"Subreddit information":results})
