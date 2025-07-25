@@ -1,13 +1,13 @@
-package main
+package utils
 
 import (
 	"fmt"
 	"os"
 	"encoding/json"
+	"strconv"
 )
-func getConfigString(name string)(string){
-  // this function looks for config.json and retrieves the value
-  	file, openErr := os.Open("config.json")
+func GetConfigString(name string)(string){
+  	file, openErr := os.Open("config/config.json")
 	if openErr != nil {
 		fmt.Println("Error opening config! Exiting...\n", openErr)
 		os.Exit(1)
@@ -23,7 +23,7 @@ func getConfigString(name string)(string){
   }
   configString, configErr := config[name]
   if !configErr {
-    fmt.Println("value does not exist in config.json! exiting...\n")
+    fmt.Println("value does not exist in config.json! exiting...\n", configErr)
     os.Exit(1)
   }
   return configString
@@ -31,7 +31,12 @@ func getConfigString(name string)(string){
 
 }
 
-func getConfigInteger(name string)(int){
-  // this function looks for config.json and retrieves the value
-
+func GetConfigInteger(name string)(int){
+  configString := GetConfigString(name)
+  num, numErr := strconv.Atoi(configString)
+  if numErr != nil {
+	fmt.Println("value is not an integer! Please check your config before trying again. Exiting...\n",numErr)
+	os.Exit(1)
+  }
+  return num
 }
